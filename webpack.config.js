@@ -13,8 +13,10 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: require('html-webpack-template'),
+      filename:'index.html',
       inject: false,
       appMountId: 'app',
+      appMountHtmlSnippet: '<div id="root"></div>',
       devServer: 'https://localhost:3000'
     })
   ],
