@@ -1,3 +1,7 @@
+// import React from 'react'
+// import { describe, it } from 'jest'
+// import { render } from '@testing-library/react'
+
 // ETA: 1-2 hours
 describe('<Pagination />', () => {
   it('should render "First" page link', () => {

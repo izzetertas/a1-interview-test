@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const absolute = dir => path.resolve(__dirname,  dir)
 
 module.exports = {
   entry: './src/index.tsx',
@@ -32,7 +33,29 @@ module.exports = {
           {
             loader: 'css-loader',
           },
-          'sass-loader?sourceMap'
+          'sass-loader?sourceMap',
+          {
+            loader: 'sass-resources-loader',
+            options: {
+              resources: [
+                absolute('src/components/utilities/GlobalStylesProvider/styles/resources.scss')
+              ]
+            }
+          }          
+        ]
+      },
+      {
+        test: /\.(woff|ttf|eot|svg|png)(\?v=\d+\.\d+\.\d+)?$/,
+        include: [
+          absolute('src/components/utilities/GlobalStylesProvider/assets/fonts'),
+        ],
+        loaders: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: 'fonts/[name].[ext]?[hash]'
+            }
+          }
         ]
       },
       { test: /\.tsx?$/, loader: 'ts-loader' }

@@ -1,6 +1,11 @@
 import * as React from 'react';
 import { render } from 'react-dom';
 import { Index } from './views/cars/Index';
-import '../server';
+import GlobalStylesProvider from './components/utilities/GlobalStylesProvider';
 
-render(<Index />, document.getElementById('root'));
+render((
+  <GlobalStylesProvider>
+    <Index />
+  </GlobalStylesProvider>
+ ), document.getElementById('root')
+);

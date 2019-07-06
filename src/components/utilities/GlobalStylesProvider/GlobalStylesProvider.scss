@@ -1,0 +1,15 @@
+@import './styles/font-face';
+@import './styles/variables.scss';
+
+body {
+  margin: 0; // 1
+  font-family: $base-font-family;
+  font-size: $base-font-size;
+  font-weight: $base-font-weight-regular;
+  line-height: $gbl-line-height;
+  color: $color-orange;
+  text-align: left; // 3
+  background-color: $color-white; // 2
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
