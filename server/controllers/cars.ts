@@ -1,4 +1,5 @@
-import { cars, ICar } from '../mocks/cars';
+import { ICar } from '../types';
+import { cars } from '../mocks/cars';
 import { MockRequest, MockResponse } from 'xhr-mock';
 
 const ITEMS_PER_PAGE = 10;

@@ -1,9 +1,7 @@
 import * as faker from 'faker';
 import { colors } from './colors';
 import { manufacturers } from './manufacturers';
-import { ICar } from '../types';
-import { IManufacturer } from '../types';
-
+import { IManufacturer, ICar } from '../types';
 export const cars: Array<ICar> = [];
 
 for (var i = 0; i < 1000; i++) {
