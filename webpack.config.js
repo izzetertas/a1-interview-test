@@ -13,7 +13,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: require('html-webpack-template'),
-      filename:'index.html',
+      filename: 'index.html',
       inject: false,
       appMountId: 'app',
       appMountHtmlSnippet: '<div id="root"></div>',
@@ -24,6 +24,18 @@ module.exports = {
     extensions: ['.ts', '.tsx', '.js', '.jsx']
   },
   module: {
-    rules: [{ test: /\.tsx?$/, loader: 'ts-loader' }]
+    rules: [
+      {
+        test: /\.scss$/,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+          },
+          'sass-loader?sourceMap'
+        ]
+      },
+      { test: /\.tsx?$/, loader: 'ts-loader' }
+    ]
   }
 };
