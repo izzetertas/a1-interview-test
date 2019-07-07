@@ -1,11 +1,16 @@
-import * as React from 'react';
+import React from 'react';
 import { render } from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
+
 import { Index } from './views/cars/Index';
 import GlobalStylesProvider from './components/utilities/GlobalStylesProvider';
 
+
 render((
   <GlobalStylesProvider>
-    <Index />
+    <BrowserRouter>
+      <Index />
+    </BrowserRouter>
   </GlobalStylesProvider>
- ), document.getElementById('root')
+), document.getElementById('root')
 );
