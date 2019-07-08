@@ -1,0 +1,16 @@
+.button {
+ margin: 30px;
+ font-size: 16px;
+ color: white;
+ height: 32px;
+ width: 128px;
+ border: none;
+ border-radius: 3px;
+ background-color: $color-orange;
+ cursor: pointer;
+
+ &:hover,
+ &-selected {
+  background-color: $color-dark-orange;
+ } 
+}
