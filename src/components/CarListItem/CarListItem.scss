@@ -1,0 +1,62 @@
+.CarListItem-container {
+  display: flex;
+  border: 1px solid $color-grey;
+  max-width: 600px;
+  padding: $padding-2;
+  margin-bottom: $margin-2;
+}
+
+.CarListItem-image {
+  display: flex;
+  width: 20%;
+  background-color: $color-grey;
+  min-height: 60px;
+  margin-right: $margin-3;
+  align-items: center;
+  text-align: center;
+}
+
+.CarListItem-content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  > div {
+    margin: 4px 0;
+  }
+}
+
+.CarListItem-content__header {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.CarListItem-loading_short {
+  width: 40%;
+  background-color: $color-grey;
+  margin-top: $margin-1;
+}
+
+.CarListItem-loading_long_and_height,
+.CarListItem-loading_long {
+  width: 90%;
+  margin: 1px 0;
+  background-color: $color-grey;
+}
+
+.CarListItem-loading_long_and_height {
+  height: 30px;
+}
+
+.CarListItem-details{
+  color: $color-orange;
+
+  a {
+    color: $color-orange;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
