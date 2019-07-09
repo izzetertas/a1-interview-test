@@ -3,8 +3,8 @@ import './Button.scss'
 
 type ButtonProps = {
   state?: 'default' | 'selected'
-  children: string
-  onClick?: () => void 
+  text: string
+  onClick?: () => void
 }
 
 export default function Button (props: ButtonProps) {
@@ -20,7 +20,7 @@ export default function Button (props: ButtonProps) {
       className={getClassNames()}
       onClick={handleClick}
     >
-      {props.children}
+      {props.text}
     </button>
   )
 }
