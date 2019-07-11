@@ -1,0 +1,33 @@
+.select-container {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  margin: $margin-1;
+}
+
+.select-input {
+  padding: $padding-1;
+  border: 1px solid $color-grey;
+  margin-bottom: $margin-1;
+}
+
+.select-option {
+  border: 1px solid $color-grey;
+  padding: $padding-1;
+
+  &:hover {
+    background-color: $color-orange;
+    color: #ffffff;
+  }
+}
+
+.select-title {
+  margin: $margin-1 0;
+}
+
+select {
+  width: 200px;
+  height: 40px;
+  border: 1px solid $color-orange;
+}
+
