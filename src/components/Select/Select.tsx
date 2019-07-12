@@ -1,21 +1,21 @@
-import React, { MouseEvent, useState } from 'react'
+import React, { useState } from 'react'
 import './Select.scss'
 
 type SelectProps = {
   title?: string
   options: string[]
   defaultValue?: string
-  onChange?: () => string
+  onChange?: (value: string) => void
 }
 
 export default function Select(props: SelectProps) {
   const [toggle, setToggle] = useState(false)
   const [value, setValue] = useState(props.defaultValue || props.options[0])
-  // const handleChange = (event: MouseEvent<HTMLSelectElement>) => {
-  //   if (props.onChange) props.onChange(event.target)
-  // }
-
-  // const getClassNames = () => `button${props.state === 'selected' ? ' button-selected' : ''}`
+  const handleChange = (option: string) => {
+    setValue(option)
+    setToggle(false)
+    if(props.onChange) props.onChange(option)
+  }
 
   return (
     <div className='select-container'>
@@ -25,12 +25,20 @@ export default function Select(props: SelectProps) {
         </div>
       }
       <div className='select-input' onClick={() => setToggle(!toggle)}>
-        {value}
+        <span>{value}</span>
+        {!toggle && <span className='select-input__arrow'>&#9660;</span>}
+        {toggle && <span className='select-input__arrow'>&#9650;</span>}
       </div>
       {toggle && 
         <div>
-          {props.options.filter(o => o !== value).map(option => (
-            <div className='select-option' onClick={() => { setValue(option); setToggle(false);}}>{option}</div>
+          {props.options.filter(o => o !== value).map((option, ind) => (
+            <div
+              key={ind}
+              className='select-option'
+              onClick={event => handleChange(option)}
+            >
+              {option}
+            </div>
           ))}
         </div>
       }

@@ -1,14 +1,23 @@
 .select-container {
   display: flex;
   flex-direction: column;
-  width: 200px;
+  width: 100%;
+  padding: $padding-1;
+  max-width: 250px;
   margin: $margin-1;
+  cursor: pointer;
 }
 
 .select-input {
   padding: $padding-1;
   border: 1px solid $color-grey;
   margin-bottom: $margin-1;
+  display: flex;
+  justify-content: space-between;
+
+  &__arrow {
+    color: $color-grey;
+  }
 }
 
 .select-option {
@@ -25,9 +34,9 @@
   margin: $margin-1 0;
 }
 
-select {
-  width: 200px;
-  height: 40px;
-  border: 1px solid $color-orange;
-}
+// select {
+//   width: 200px;
+//   height: 40px;
+//   border: 1px solid $color-orange;
+// }
 
