@@ -9,6 +9,7 @@
 
 .cars-content {
   padding: $padding-1;
+  display: flex;
 
   &__filter {
     display: flex;
@@ -21,7 +22,12 @@
   }
 
   &__result {
-    width: 70%;
-    background-color: $color-grey;
+    margin: 0 $margin-3;
+    width: 65%;
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
   }
 }
