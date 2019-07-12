@@ -2,14 +2,13 @@ import React from 'react';
 import { render } from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 
-import { Index } from './views/cars/Index';
+import Cars from './views/cars/Cars';
 import GlobalStylesProvider from './components/utilities/GlobalStylesProvider';
-
 
 render((
   <GlobalStylesProvider>
     <BrowserRouter>
-      <Index />
+      <Cars />
     </BrowserRouter>
   </GlobalStylesProvider>
 ), document.getElementById('root')
