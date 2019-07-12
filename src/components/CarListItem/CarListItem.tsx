@@ -38,7 +38,7 @@ export default function CarListItem(props: CarListItemProps) {
   return (
     <div className='CarListItem-container'>
       <div className='CarListItem-image'>
-        <img src={props.pictureUrl} alt={props.modelName}/>
+        <img src={props.pictureUrl} />
       </div>
       <div className='CarListItem-content'>
         <div className='CarListItem-content__header'>{props.manufacturerName} {props.modelName}</div>
