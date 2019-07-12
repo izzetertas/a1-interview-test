@@ -50,30 +50,41 @@ export const CarSearch = () => {
         <Button onClick={() => console.log('oldu')} text='Filter' />
       </div>
       <div className='cars-content__result'>
+        <div className='cars-content__header'>
+          <div>
+            <h2>Available Cars</h2>
+            <div>Showing 10 of 100 results</div>
+          </div>
+          <div>
+            <Select
+              title='Sort by'
+              options={['None', 'Milage - Ascending', 'Milage - Descending']}
+            /> 
+          </div>
+        </div>
         <div>
-        <CarListItem
-          loading={true}
-          color='red'
-          fuelType='Petrol'
-          manufacturerName='Mercedes'
-          mileage={{ number: 2323, unit: 'km' }}
-          modelName='Benz Vito Tourer'
-          pictureUrl='http:/google.com'
-          stockNumber={4562322}
-        />
+          <CarListItem
+            loading={true}
+            color='red'
+            fuelType='Petrol'
+            manufacturerName='Mercedes'
+            mileage={{ number: 2323, unit: 'km' }}
+            modelName='Benz Vito Tourer'
+            pictureUrl='http:/google.com'
+            stockNumber={4562322}
+          />
 
-        <CarListItem
-          color='red'
-          fuelType='Petrol'
-          manufacturerName='Mercedes'
-          mileage={{ number: 2323, unit: 'km' }}
-          modelName='Benz Vito Tourer'
-          pictureUrl='http:/google.com'
-          stockNumber={4562322}
-        />
+          <CarListItem
+            color='red'
+            fuelType='Petrol'
+            manufacturerName='Mercedes'
+            mileage={{ number: 2323, unit: 'km' }}
+            modelName='Benz Vito Tourer'
+            pictureUrl='http:/google.com'
+            stockNumber={4562322}
+          />
         </div>
       </div>
-      <Button state='selected' text='Selected' />
     </div>
   )
 }
