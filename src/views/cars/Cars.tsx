@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import Button from '../../components/Button';
-import CarListItem from '../../components/CarListItem';
+import CarListItem, { CarListItemContentLoader } from '../../components/CarListItem';
 import Select from '../../components/Select';
 import { CarsSearchParams, Car } from '../../../store/types';
 import { AppState } from '../../../store/store';
@@ -31,6 +31,36 @@ export const CarsSearch = (props: CarsSearchProps) => {
   const [manufacturer, setManufacturer] = useState(props.params.manufacturer)
   const [sortBy, setSortBy] = useState(props.params.sortBy)
 
+  useEffect(() => handleFilterClick(), [sortBy])
+
+  const handleFilterClick = () => {
+    props.searchCars(
+      {
+        color,
+        manufacturer,
+        pageNumber: 1,
+        pageSize: 10,
+        sortBy
+      }
+    )
+  }
+
+  const renderCars = () => {
+    if(props.loading) {
+      return Array.from({length: props.params.pageSize}, (v, i) => 
+        (<CarListItemContentLoader key={i} />)
+      )
+    }
+
+    return props.records.map((record: Car) => (
+      <CarListItem
+        key={record.stockNumber}
+        {...record}
+        loading={props.loading}
+      />
+    ))
+  }
+
   return (
     <div className='cars-content'>
       <div className='cars-content__filter'>
@@ -46,15 +76,7 @@ export const CarsSearch = (props: CarsSearchProps) => {
           onChange={value => setManufacturer(value)}
           defaultValue={manufacturer}
         /> 
-        <Button onClick={() => props.searchCars(
-          {
-            color,
-            manufacturer,
-            pageNumber: 1,
-            pageSize: 10,
-            sortBy
-          }
-        )} text='Filter' />
+        <Button onClick={handleFilterClick} text='Filter' />
       </div>
       <div className='cars-content__result'>
         <div className='cars-content__header'>
@@ -72,13 +94,7 @@ export const CarsSearch = (props: CarsSearchProps) => {
           </div>
         </div>
         <div className='cars-content__data'>
-          {props.records.map(record => (
-            <CarListItem
-              key={record.stockNumber}
-              {...record}
-              loading={props.loading}
-            />
-          ))}
+          {renderCars()}
         </div>
       </div>
     </div>

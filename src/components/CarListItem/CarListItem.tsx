@@ -51,3 +51,17 @@ export default class CarListItem extends React.PureComponent<CarListItemProps> {
     )
   }
 }
+
+export const CarListItemContentLoader = ()  => {
+  return (
+    <div className='CarListItem-container'>
+      <div className='CarListItem-image'>
+      </div>
+      <div className='CarListItem-content'>
+        <div className='CarListItem-loading_long_and_height'>&nbsp;</div>
+        <div className='CarListItem-loading_long'>&nbsp;</div>
+        <div className='CarListItem-loading_short'>&nbsp;</div>
+      </div>
+    </div>
+  )
+}
