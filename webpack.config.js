@@ -9,7 +9,10 @@ module.exports = {
     hot: true,
     compress: true,
     host: 'localhost',
-    port: 3000
+    port: 3000,
+    proxy: {
+      '/api': 'http://localhost:3001',
+    },
   },
   plugins: [
     new HtmlWebpackPlugin({
