@@ -1,1 +1,1 @@
-export { default } from './CarListItem';
+export { default, CarListItemContentLoader } from './CarListItem';
