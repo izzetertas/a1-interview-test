@@ -1,6 +1,6 @@
 import { ICar } from '../types';
 import { cars } from '../mocks/cars';
-import { MockRequest, MockResponse } from 'xhr-mock';
+import { Request, Response } from 'express';
 
 const ITEMS_PER_PAGE = 10;
 
@@ -25,26 +25,23 @@ function filterByProperty(
   return collection;
 }
 
-export function getCar(req: MockRequest, res: MockResponse) {
-  const url = req.url();
-  const stockNumber = url.path ? url.path.match(/(\d+)/) : [];
+export function getCar(req: Request, res: Response) {
+  const { stockNumber } = req.params
+  if(!stockNumber) return res.status(404)
 
-  const car = stockNumber
-    ? cars.find(function(eachCar) {
-        return eachCar.stockNumber == Number(stockNumber[0]);
-      })
-    : null;
+  const car = cars.find(function(eachCar) {
+    return eachCar.stockNumber == Number(stockNumber[0]);
+  })
 
   if (car) {
-    return res.status(201).body(JSON.stringify({ car }));
+    return res.status(201).send(JSON.stringify({ car }));
   } else {
     return res.status(404);
   }
 }
 
-export function getCars(req: MockRequest, res: MockResponse) {
-  const url = req.url();
-  const query = new URLSearchParams(url.query);
+export function getCars(req: Request, res: Response) {
+  const query = new URLSearchParams(req.query);
 
   let filteredCars = cars;
   const page = query.get('page');
@@ -73,7 +70,7 @@ export function getCars(req: MockRequest, res: MockResponse) {
     });
   }
 
-  return res.status(201).body(
+  return res.status(201).send(
     JSON.stringify({
       cars: paginate(filteredCars, Number(page || 1)),
       totalPageCount: Math.ceil(filteredCars.length / ITEMS_PER_PAGE),

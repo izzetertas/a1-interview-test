@@ -1,6 +1,6 @@
 import { colors } from '../mocks/colors';
-import { MockRequest, MockResponse } from 'xhr-mock';
+import { Request, Response } from 'express';
 
-export function getColors(req: MockRequest, res: MockResponse) {
-  return res.status(201).body(JSON.stringify({ colors }));
+export function getColors(req: Request, res: Response) {
+  return res.status(201).send(JSON.stringify({ colors }));
 }

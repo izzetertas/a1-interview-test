@@ -1,9 +1,9 @@
 export const colors = [
-  'red',
+  'black',
   'blue',
   'green',
-  'black',
+  'red',
+  'silver',
   'yellow',
   'white',
-  'silver'
 ];

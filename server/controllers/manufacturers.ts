@@ -1,6 +1,6 @@
 import { manufacturers } from '../mocks/manufacturers';
-import { MockRequest, MockResponse } from 'xhr-mock';
+import { Request, Response } from 'express';
 
-export function getManufacturers(req: MockRequest, res: MockResponse) {
-  return res.status(201).body(JSON.stringify({ manufacturers }));
+export function getManufacturers(req: Request, res: Response) {
+  return res.status(201).send(JSON.stringify({ manufacturers }));
 }

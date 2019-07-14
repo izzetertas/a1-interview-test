@@ -1,53 +1,60 @@
-import React from 'react';
-import { Switch, Route, Link } from 'react-router-dom';
-import Header from '../layout/Header';
-import Footer from '../layout/Footer';
-// import CarDetail from '../../components/CarDetail';
-import axios from 'axios';
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
 
-import './Cars.scss'
-import CarDetail from '../../components/CarDetail';
 import Button from '../../components/Button';
 import CarListItem from '../../components/CarListItem';
 import Select from '../../components/Select';
+import { CarsSearchParams, Car } from '../../../store/types';
+import { AppState } from '../../../store/store';
+import { Dispatch } from 'redux';
+import { carsRequest } from '../../../store/actions'
 
-const Cars = () => {
-  axios({ url: '/api/colors'})
-    .then(data => console.log(data))
-  return (
-    <div className='cars-wrapper'>
-      <Header />
-      <main className='main-container'>
-        <Switch>
-          <Route exact path="/" component={CarSearch} />
-          <Route exact path="/cars" component={CarSearch} />
-          <Route exact path="/car/:id" component={CarDetail} />
-        </Switch>
-      </main>
-      <Footer />
-    </div>
-  );
-};
+import './Cars.scss'
 
-export default Cars;
+type DispatchFromProps = {
+  searchCars: (params: CarsSearchParams) => void 
+}
 
-export const CarSearch = () => {
-  const colors = ['red', 'blue', 'green', 'black', 'yellow', 'white', 'silver']
-  const manufacturers = ['Audi', 'Bmw', 'Chrysler']
+type CarsSearchProps = {
+   params: CarsSearchParams
+   loading: boolean
+   errorMessage: string
+   records: Car[]
+   colors: string[]
+   manufacturers: string[]
+   sortBy: string[]
+} & DispatchFromProps
+
+
+export const CarsSearch = (props: CarsSearchProps) => {
+  const [color, setColor] = useState(props.params.color)
+  const [manufacturer, setManufacturer] = useState(props.params.manufacturer)
+  const [sortBy, setSortBy] = useState(props.params.sortBy)
 
   return (
     <div className='cars-content'>
       <div className='cars-content__filter'>
         <Select
           title='Color'
-          options={['All Car color', ...colors]}
-          onChange={value => {console.log('selected color', value)}}
+          options={props.colors}
+          onChange={value => setColor(value)}
+          defaultValue={color}
         /> 
         <Select
-          title='Manifacturer'
-          options={['All Manifacturers', ...manufacturers]}
+          title='Manufacturer'
+          options={props.manufacturers}
+          onChange={value => setManufacturer(value)}
+          defaultValue={manufacturer}
         /> 
-        <Button onClick={() => console.log('oldu')} text='Filter' />
+        <Button onClick={() => props.searchCars(
+          {
+            color,
+            manufacturer,
+            pageNumber: 1,
+            pageSize: 10,
+            sortBy
+          }
+        )} text='Filter' />
       </div>
       <div className='cars-content__result'>
         <div className='cars-content__header'>
@@ -58,33 +65,47 @@ export const CarSearch = () => {
           <div>
             <Select
               title='Sort by'
-              options={['None', 'Milage - Ascending', 'Milage - Descending']}
+              options={props.sortBy}
+              onChange={value => setSortBy(value)}
+              defaultValue={sortBy}
             /> 
           </div>
         </div>
-        <div>
-          <CarListItem
-            loading={true}
-            color='red'
-            fuelType='Petrol'
-            manufacturerName='Mercedes'
-            mileage={{ number: 2323, unit: 'km' }}
-            modelName='Benz Vito Tourer'
-            pictureUrl='http:/google.com'
-            stockNumber={4562322}
-          />
-
-          <CarListItem
-            color='red'
-            fuelType='Petrol'
-            manufacturerName='Mercedes'
-            mileage={{ number: 2323, unit: 'km' }}
-            modelName='Benz Vito Tourer'
-            pictureUrl='http:/google.com'
-            stockNumber={4562322}
-          />
+        <div className='cars-content__data'>
+          {props.records.map(record => (
+            <CarListItem
+              key={record.stockNumber}
+              {...record}
+              loading={props.loading}
+            />
+          ))}
         </div>
       </div>
     </div>
   )
 }
+
+const mapDispatchToProps = (dispatch: Dispatch): DispatchFromProps => {
+  return {
+    searchCars: (params: CarsSearchParams) => dispatch(carsRequest(params))
+  }
+}
+
+const mapStateToProps = (state: AppState) => {
+  const { params, records, totalRecord, loading, errorMessage } = state.cars
+  return {
+    loading,
+    errorMessage,
+    params,
+    records,
+    totalRecord,
+    ...state.filters
+  }
+}
+
+const Cars = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CarsSearch)
+
+export default Cars

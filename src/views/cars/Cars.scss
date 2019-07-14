@@ -30,4 +30,9 @@
     display: flex;
     justify-content: space-between;
   }
+
+  &__data {
+    overflow-y: auto;
+    max-height: 800px;
+  }
 }

@@ -1,10 +1,16 @@
-import mock from 'xhr-mock';
-import { getCars, getCar } from './controllers/cars';
-import { getColors } from './controllers/colors';
-import { getManufacturers } from './controllers/manufacturers';
+import express = require('express')
+import { getCars, getCar } from './controllers/cars'
+import { getColors } from './controllers/colors'
+import { getManufacturers } from './controllers/manufacturers'
 
-mock.setup();
-mock.get(/\/api\/cars\/[0-9]/, getCar);
-mock.get(/\/api\/cars$/, getCars);
-mock.get(/\/api\/colors/, getColors);
-mock.get(/\/api\/manufacturers/, getManufacturers);
+const app: express.Application = express()
+
+app.get('/api/cars/:stockNumber', getCar)
+app.get('/api/cars', getCars)
+app.get('/api/colors', getColors)
+app.get('/api/manufacturers', getManufacturers)
+
+const port = 3001
+app.listen(port, function () {
+  console.log(`Auto-1 app listening on port ${port}!`)
+})
