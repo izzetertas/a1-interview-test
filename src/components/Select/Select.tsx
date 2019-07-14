@@ -12,7 +12,7 @@ type SelectProps = {
 export default function Select(props: SelectProps) {
   const ref = useRef<HTMLInputElement>(null);
   const [toggle, setToggle] = useState(false)
-  const [value, setValue] = useState(props.defaultValue || props.options[0])
+  const [value, setValue] = useState(props.defaultValue || (props.options && props.options[0]))
   const handleChange = (option: string) => {
     setValue(option)
     setToggle(false)
@@ -33,7 +33,7 @@ export default function Select(props: SelectProps) {
         {!toggle && <span className='select-input__arrow'>&#9660;</span>}
         {toggle && <span className='select-input__arrow'>&#9650;</span>}
       </div>
-      {toggle && 
+      {(toggle && props.options.length > 1) &&
         <div className='select-scroll' ref={ref} >
           {props.options.filter(o => o !== value).map((option, ind) => (
             <div
