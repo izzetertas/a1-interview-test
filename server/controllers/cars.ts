@@ -41,14 +41,8 @@ export function getCar(req: Request, res: Response) {
 }
 
 export function getCars(req: Request, res: Response) {
-  const query = new URLSearchParams(req.query);
-
+  const { page, sort, manufacturer, color} = req.query;
   let filteredCars = cars;
-  const page = query.get('page');
-  const sort = query.get('sort');
-  const manufacturer = query.get('manufacturer');
-  const color = query.get('color');
-
   filteredCars = filterByProperty(
     'manufacturerName',
     manufacturer,
