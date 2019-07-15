@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import Button from '../../components/Button';
+import Pagination from '../../components/Pagination/Pagination';
 import CarListItem, { CarListItemContentLoader } from '../../components/CarListItem';
 import Select from '../../components/Select';
 import { CarsSearchParams, Car } from '../../../store/types';
@@ -16,6 +17,7 @@ type DispatchFromProps = {
 }
 
 type CarsSearchProps = {
+   totalRecord: number
    params: CarsSearchParams
    loading: boolean
    errorMessage: string
@@ -39,6 +41,18 @@ export const CarsSearch = (props: CarsSearchProps) => {
         color,
         manufacturer,
         pageNumber: 1,
+        pageSize: 10,
+        sortBy
+      }
+    )
+  }
+
+  const handlePaginationClick = (pageNumber: number) => {
+     props.searchCars(
+      {
+        color,
+        manufacturer,
+        pageNumber,
         pageSize: 10,
         sortBy
       }
@@ -83,6 +97,7 @@ export const CarsSearch = (props: CarsSearchProps) => {
           <div>
             <h2>Available Cars</h2>
             <div>Showing 10 of 100 results</div>
+            
           </div>
           <div>
             <Select
@@ -96,6 +111,12 @@ export const CarsSearch = (props: CarsSearchProps) => {
         <div className='cars-content__data'>
           {renderCars()}
         </div>
+        <Pagination 
+          pageSize={props.params.pageSize} 
+          pageNumber={props.params.pageNumber} 
+          totalResult={props.totalRecord}
+          onClick={handlePaginationClick}
+        />
       </div>
     </div>
   )
