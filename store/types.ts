@@ -36,7 +36,6 @@ export interface CarState {
   params: CarsSearchParams,
   records: Car[]
   totalRecord: number
-  selectedRecord: number | null
   errorMessage: string | null
   loading: boolean
 }
@@ -58,8 +57,6 @@ interface CarsFailureAction {
   type: typeof CARS_FAILED
   errorMessage: string
 }
-
-export type CarActionTypes = CarsRequestAction | CarsSuccessAction | CarsFailureAction
 
 export interface FilterState {
   colors: string []

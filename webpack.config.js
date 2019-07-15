@@ -5,6 +5,7 @@ const absolute = dir => path.resolve(__dirname, dir)
 module.exports = {
   entry: './src/index.tsx',
   devServer: {
+    historyApiFallback: true,
     contentBase: path.join(__dirname, 'dist'),
     hot: true,
     compress: true,

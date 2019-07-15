@@ -11,7 +11,6 @@ const initialCarState: CarState = {
   },
   records: [],
   totalRecord: 0,
-  selectedRecord: null,
   errorMessage: null,
   loading: false
 }
@@ -23,7 +22,6 @@ export default function carsReducer(state = initialCarState, action: CarActionTy
         ...state,
         params: action.params,
         records: [],
-        selectedRecord: null,
         loading: true,
         errorMessage: null
       }
@@ -38,7 +36,6 @@ export default function carsReducer(state = initialCarState, action: CarActionTy
         ...state,
         records: [],
         totalRecord: 0,
-        selectedRecord: null,
         errorMessage: action.errorMessage,
         loading: false
       }

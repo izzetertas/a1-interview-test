@@ -29,9 +29,9 @@ const AppComponent = (props: AppProps) => {
       <Header />
       <main className='main-container'>
         <Switch>
-          <Route exact path="/" component={Cars} />
-          <Route exact path="/cars" component={Cars} />
-          <Route exact path="/car/:id" component={CarDetail} />
+        <Route exact path="/" component={Cars} />
+          <Route path="/cars" component={Cars} />
+          <Route path="/car/:stockNumber" component={CarDetail} />
         </Switch>
       </main>
       <Footer />
