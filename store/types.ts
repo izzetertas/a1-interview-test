@@ -68,3 +68,5 @@ export type FiltersActionType = {
   type: typeof FILTERS_LOAD
   payload: FilterState
 }
+
+export type CarActionTypes = CarsRequestAction | CarsSuccessAction | CarsFailureAction
