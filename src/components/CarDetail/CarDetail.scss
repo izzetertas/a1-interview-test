@@ -3,16 +3,24 @@
 	margin: 0px auto;
 	height:800px;
 }
+
 .CarDetail-img {
 	padding: 0px;
 	margin: 0px;
 	background-color: $color-grey;
 	height: 280px;
 }
+
 .CarDetail-content {
-	display:flex;
-	margin-top: $margin-1 ;
-	justify-content: space-evenly;
+	display: flex;
+	flex-direction: column;
+	margin-top: $margin-1;
+	align-items: center;
+
+	@include tablet {
+		flex-direction: row;
+		justify-content: space-evenly;
+	}
 }
 
 .CarDetail-detail {
@@ -21,15 +29,19 @@
 	header {
 		font-size: 24px;
   	font-weight: bold;
-		margin-top: $margin-1 ;
+		margin-top: $margin-1;
 	}
 }
 
 .CarDetail-favourite {
-	width: 300px;
 	padding-top: 30px;
 	border: 1px solid $color-grey;
 	padding: $margin-2;
 	height: 156px;
-	margin-top: $margin-3;
+	margin: $margin-3 $margin-2;
+
+	@include tablet {
+		width: 300px;
+		margin-top: $margin-3;
+	}
 }
