@@ -8,7 +8,9 @@ class Header extends React.Component {
   render() {
     return (
       <header className='header-wrapper'>
-        <Logo />
+        <Link to='/'>
+          <Logo />
+        </Link>
         <nav>
           <ul>
             <li>Purchase</li>
