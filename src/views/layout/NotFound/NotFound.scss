@@ -1,0 +1,15 @@
+.NotFound-container {
+	padding: $padding-2;
+	text-align: center;
+	margin: 50px auto;
+
+	img {
+		width: 200px;
+		margin:0 auto;
+	}
+}
+
+.NotFound-link {
+	color: $color-orange;
+	text-decoration: none;
+}

@@ -9,6 +9,7 @@ import Header from '../layout/Header'
 import Footer from '../layout/Footer'
 import CarDetail from '../../components/CarDetail'
 import Cars from '../cars'
+import NotFound from '../layout/NotFound'
 
 
 import './App.scss'
@@ -32,6 +33,7 @@ const AppComponent = (props: AppProps) => {
         <Route exact path="/" component={Cars} />
           <Route path="/cars" component={Cars} />
           <Route path="/car/:stockNumber" component={CarDetail} />
+          <Route component={NotFound} />
         </Switch>
       </main>
       <Footer />
