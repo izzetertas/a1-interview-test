@@ -11,6 +11,7 @@
   padding: $padding-1;
   display: flex;
   flex-direction: column;
+  justify-content: center;
 
   @include desktop {
     flex-direction: row;
@@ -22,16 +23,17 @@
     border: 1px solid $color-grey;
     height: 220px;
     padding: 0 $margin-2 0 $margin-2;
-    margin: $margin-2 0 0 $margin-1;
+    margin: $margin-1;
   }
 
   &__result {
     width: 100%;
-    
-     @include desktop {
-        width: 65%;
-        margin: 0 $margin-3;
-     }
+    max-width: 800px;
+
+    @include desktop {
+      width: 65%;
+      margin: 0 $margin-3;
+    }
   }
 
   &__header {
@@ -50,7 +52,10 @@
   }
 
   &__data {
-    overflow-y: auto;
-    max-height: 800px;
+    margin: $margin-1;
+
+    @include desktop {
+      margin: $margin-1 0;
+    }
   }
 }
