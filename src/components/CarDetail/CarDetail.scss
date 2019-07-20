@@ -1,0 +1,35 @@
+.CarDetail-container {
+	padding: 0px;
+	margin: 0px auto;
+	height:800px;
+}
+.CarDetail-img {
+	padding: 0px;
+	margin: 0px;
+	background-color: $color-grey;
+	height: 280px;
+}
+.CarDetail-content {
+	display:flex;
+	margin-top: $margin-1 ;
+	justify-content: space-evenly;
+}
+
+.CarDetail-detail {
+  width:400px;
+
+	header {
+		font-size: 24px;
+  	font-weight: bold;
+		margin-top: $margin-1 ;
+	}
+}
+
+.CarDetail-favourite {
+	width: 300px;
+	padding-top: 30px;
+	border: 1px solid $color-grey;
+	padding: $margin-2;
+	height: 156px;
+	margin-top: $margin-3;
+}
