@@ -18,25 +18,49 @@ interface CarDetailComponentProps {
 }
 
 type DispatchFromProps = {
-  carDetail: Car | null
-  stockNumber1: number
+  carDetail: Car
 }
 
 type CarDetailProps = CarDetailComponentProps & DispatchFromProps
 
-function CarDetailComponent(props: CarDetailProps) {
-  const [carDetail, setCarDetail] = useState(props.carDetail)
+const CarDetailComponent = (props: CarDetailProps) => {
+  const [carDetail, setCarDetail] = useState<Car>(props.carDetail)
+  const [favorite, setFavorite] = useState(false)
+
   useEffect(() => {
     const fetchCarDetail = async () => {
       const result = await axios(`/api/cars/${props.match.params.stockNumber}`)
       setCarDetail(result.data.car)
+      findFavoriteItem(result.data.car.stockNumber)
     }
     if (!carDetail) {
       fetchCarDetail()
+    } else {
+      findFavoriteItem(carDetail.stockNumber.toString())      
     }
   })
 
+  const findFavoriteItem = (stockNumber: string) => {
+    const favoriteCars: [] = JSON.parse(localStorage.getItem('favoriteCars') || '[]')
+    setFavorite(favoriteCars.some(value => value === stockNumber))
+  }
+
+  const handleClick = () => {
+    if (!carDetail) return
+    
+    let favoriteCars: string[] = JSON.parse(localStorage.getItem('favoriteCars') || '[]')
+    const stockNumber = carDetail.stockNumber.toString()
+    if (!favorite) {
+      favoriteCars.push(stockNumber)
+    } else {
+      favoriteCars = favoriteCars.filter( value => value !== stockNumber)
+    }
+    setFavorite(!favorite)
+    localStorage.setItem('favoriteCars', JSON.stringify(favoriteCars))
+  }
+
   if (!carDetail) return (<div>Car not found</div>)
+
   return (
     <div className='CarDetail-container'>
       <div className='CarDetail-img'></div>
@@ -52,7 +76,7 @@ function CarDetailComponent(props: CarDetailProps) {
         <div className='CarDetail-favourite'>
           <p>If you like this car, click the button and save it in your collection of favourite items.</p>
           <div style={{ textAlign: 'right' }}>
-            <Button text='Save' />
+            <Button text={favorite ? 'Remove' : 'Save'} onClick={handleClick} />
           </div>
         </div>
       </div>
@@ -61,7 +85,9 @@ function CarDetailComponent(props: CarDetailProps) {
 }
 
 const mapStateToProps = (state: AppState, ownProps: CarDetailComponentProps) => ({
-  carDetail: state.cars.records ? state.cars.records.find(car => car.stockNumber.toString() === ownProps.match.params.stockNumber) : null
+  carDetail: state.cars.records
+    ? state.cars.records.find(car => car.stockNumber.toString() === ownProps.match.params.stockNumber)
+    : null
 })
 
 const CarDetail = connect(
