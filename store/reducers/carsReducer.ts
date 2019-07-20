@@ -16,11 +16,12 @@ const initialCarState: CarState = {
 }
 
 export default function carsReducer(state = initialCarState, action: CarActionTypes): CarState {
+
   switch (action.type) {
     case CARS_REQUEST:
       return {
         ...state,
-        params: action.params,
+        params: {...action.params},
         records: [],
         loading: true,
         errorMessage: null
