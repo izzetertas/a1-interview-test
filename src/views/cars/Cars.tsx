@@ -11,6 +11,7 @@ import { Dispatch } from 'redux';
 import { carsRequest } from '../../../store/actions'
 
 import './Cars.scss'
+import NavFilter from '../layout/NavFilter';
 
 type DispatchFromProps = {
   searchCars: (params: CarsSearchParams) => void 
@@ -22,15 +23,11 @@ type CarsSearchProps = {
    loading: boolean
    errorMessage: string
    records: Car[]
-   colors: string[]
-   manufacturers: string[]
    sortBy: string[]
 } & DispatchFromProps
 
 
-export const CarsSearch = (props: CarsSearchProps) => {
-  const [color, setColor] = useState(props.params.color)
-  const [manufacturer, setManufacturer] = useState(props.params.manufacturer)
+export const CarsSearch = (props: CarsSearchProps) => { 
   const [sortBy, setSortBy] = useState(props.params.sortBy)
 
   useEffect(() => handleFilterClick(), [sortBy])
@@ -38,10 +35,8 @@ export const CarsSearch = (props: CarsSearchProps) => {
   const handleFilterClick = () => {
     props.searchCars(
       {
-        color,
-        manufacturer,
-        pageNumber: 1,
-        pageSize: 10,
+        ...props.params,
+        pageNumber: props.params.pageNumber > 1 ? props.params.pageNumber : 1,
         sortBy
       }
     )
@@ -50,11 +45,8 @@ export const CarsSearch = (props: CarsSearchProps) => {
   const handlePaginationClick = (pageNumber: number) => {
      props.searchCars(
       {
-        color,
-        manufacturer,
+        ...props.params,
         pageNumber,
-        pageSize: 10,
-        sortBy
       }
     )
   }
@@ -78,19 +70,7 @@ export const CarsSearch = (props: CarsSearchProps) => {
   return (
     <div className='cars-content'>
       <div className='cars-content__filter'>
-        <Select
-          title='Color'
-          options={props.colors}
-          onChange={value => setColor(value)}
-          defaultValue={color}
-        /> 
-        <Select
-          title='Manufacturer'
-          options={props.manufacturers}
-          onChange={value => setManufacturer(value)}
-          defaultValue={manufacturer}
-        /> 
-        <Button onClick={handleFilterClick} text='Filter' />
+        <NavFilter />
       </div>
       <div className='cars-content__result'>
         <div className='cars-content__header'>
