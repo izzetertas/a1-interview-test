@@ -34,7 +34,11 @@ h5 {
 }
 
 header {
-  height: 80px;
+  height: 120px;
+
+  @include tablet {
+    height: 80px;
+  }
 }
 
 footer {

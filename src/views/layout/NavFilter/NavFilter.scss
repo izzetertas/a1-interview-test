@@ -2,11 +2,11 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
-}
+  }
 
 .NavFilter-button {
-  text-align: right;
+  min-width: 250px;
   width: 100%;
-  margin-right: 26px;
+  max-width: 320px;
+  text-align: right;
 }
