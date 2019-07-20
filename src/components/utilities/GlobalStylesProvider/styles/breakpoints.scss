@@ -1,0 +1,32 @@
+$breakpoints: (
+  mobile: 0,
+  tablet: 601px,
+  desktop: 881px,
+  wideScreen: 1264px
+) !default;
+
+$breakpoints-max: (
+  mobile: map-get($breakpoints, 'tablet') - 1,
+  tablet: map-get($breakpoints, 'desktop') - 1,
+  desktop: map-get($breakpoints, 'wideScreen') - 1,
+  wideScreen: 0
+);
+
+
+@mixin tablet {
+  @media (min-width: #{map-get($breakpoints, 'tablet')}) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: #{map-get($breakpoints, 'desktop')}) {
+    @content;
+  }
+}
+
+@mixin wideScreen {
+  @media (min-width: #{map-get($breakpoints, 'wideScreen')}) {
+    @content;
+  }
+}
