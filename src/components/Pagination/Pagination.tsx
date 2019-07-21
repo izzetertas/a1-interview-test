@@ -16,7 +16,9 @@ export default function Pagination(props: PaginationProps) {
     if (props.onClick) props.onClick(value)
   }
 
-  return (
+  if (totalResult === 0) return null
+
+  return ( 
     <div className='pagination-container'>
       <button
         disabled={pageNumber === 1}
