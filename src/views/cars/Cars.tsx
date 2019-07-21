@@ -76,8 +76,9 @@ export const CarsSearch = (props: CarsSearchProps) => {
         <div className='cars-content__header'>
           <div>
             <h2>Available Cars</h2>
-            <div>Showing 10 of 100 results</div>
-            
+            {props.totalRecord > 0 &&
+              <div>{`Showing ${props.params.pageSize} of ${props.totalRecord} results`}</div>
+            }
           </div>
           <div>
             <Select
