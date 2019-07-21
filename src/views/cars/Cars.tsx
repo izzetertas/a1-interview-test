@@ -17,15 +17,17 @@ type DispatchFromProps = {
   searchCars: (params: CarsSearchParams) => void 
 }
 
-type CarsSearchProps = {
-   totalRecord: number
-   params: CarsSearchParams
-   loading: boolean
-   errorMessage: string
-   records: Car[]
-   sortBy: string[]
-} & DispatchFromProps
+type StateProps = {
+  loading: boolean
+  errorMessage: string | null
+  records: Car[]
+  totalRecord: number
+  params: CarsSearchParams
+}
 
+type CarsSearchProps = {  
+   sortBy: string[]
+} & StateProps & DispatchFromProps
 
 export const CarsSearch = (props: CarsSearchProps) => { 
   const [sortBy, setSortBy] = useState(props.params.sortBy)
@@ -109,7 +111,7 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchFromProps => {
   }
 }
 
-const mapStateToProps = (state: AppState) => {
+const mapStateToProps = (state: AppState) : StateProps => {
   const { params, records, totalRecord, loading, errorMessage } = state.cars
   return {
     loading,
@@ -121,7 +123,7 @@ const mapStateToProps = (state: AppState) => {
   }
 }
 
-const Cars = connect(
+const Cars = connect<StateProps, DispatchFromProps>(
   mapStateToProps,
   mapDispatchToProps
 )(CarsSearch)
