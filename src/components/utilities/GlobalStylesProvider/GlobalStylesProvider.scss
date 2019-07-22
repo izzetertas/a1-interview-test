@@ -1,13 +1,15 @@
 @import './styles/font-face';
 @import './styles/variables.scss';
 
+html,
 body {
-  margin: 0; // 1
+  margin: 0;
+  height: 100%;
   font-family: $base-font-family;
   font-size: $base-font-size;
   font-weight: $base-font-weight-regular;
   line-height: $gbl-line-height;
-  text-align: left; // 3
+  text-align: left;
   background-color: $color-white; // 2
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -42,12 +44,15 @@ header {
 }
 
 footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 80px;
+  background-color: $color-white;
+  z-index: 1;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  height: 80px;
-  bottom: 0;
 }
 
 
