@@ -1,6 +1,10 @@
 @import './styles/font-face';
 @import './styles/variables.scss';
 
+#app, #root, #GlobalStylesProvider {
+  height: 100%
+}
+
 html,
 body {
   margin: 0;
